@@ -1,32 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
   // your code here
-  const inputField = document.getElementById("new-task-description");
-  const formElement = document.querySelector("form");
-  formElement.addEventListener('submit', (e) => {
-    let newtask = inputField.value;
-
-    e.preventDefault();
-    if (newtask.length === 0) {
-      alert('Task cannot be empty')
-    } else {
-      handleToDo(newtask);
+  const form = document.querySelector("#create-task-form")
+  const task = document.querySelector("#tasks")
+  console.log(tasks)
+  form.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const taskDescription = document.querySelector("#new-task-description")
+    const taskValue = taskDescription.value
+    if (taskValue == "") {
+      console.log(taskValue)
+      alert("Please write a to do")
     }
-    formElement.reset();
+    else {
+      const taskList = document.createElement('li');
+      taskList.textContent = taskValue
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'x';
+      console.log(taskList)
+      tasks.appendChild(taskList)
+      taskList.appendChild(deleteButton)
+      deleteButton.addEventListener('click', () => {
+        taskList.remove();
+      })
+    }
+    form.reset()
   });
 
+
 });
-
-function handleToDo(newtask) {
-  let listItem = document.createElement("li");
-  let btn = document.createElement('button');
-
-  btn.addEventListener('click', handleDelete)
-  btn.textContent = 'X Remove'
-  listItem.innerText = `${newtask}`;
-  listItem.appendChild(btn);
-  document.querySelector("#tasks").appendChild(listItem);
-}
-
-function handleDelete(e) {
-  e.target.parentNode.remove();
-}

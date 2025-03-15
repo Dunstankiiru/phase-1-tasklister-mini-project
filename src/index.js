@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //delete button
 
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "delete";
+    deleteButton.textContent = "x";
     deleteButton.style.marginLeft = "10px";
     deleteButton.style.color = "red";
 

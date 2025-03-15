@@ -1,49 +1,33 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('create-task-form')
+  const taskList = document.getElementById('tasks')
 
-  //   // your code here
-
-  const inputField = document.getElementById("new-task-description");
-  const formElement = document.querySelector("form");
-  formElement.addEventListener('submit', (e) => {
-    let newtask = inputField.value
-
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    if (newtask.length === 0) {
-      alert('Task cannot be empty')
-    } else {
-      handleToDo(newtask);
+    const taskDescription = document.getElementById('new-task-description').value.trim();
+
+    const taskItem = document.createElement('li')
+    taskItem.textContent = taskDescription
+    taskItem.style.color = 'blue'
+    taskItem.style.fontWeight = 'bold'
+
+    const deleteButton = document.createElement('button')
+    deleteButton.textContent = 'Delete';
+    deleteButton.style.marginLeft = ' 10px'
+    deleteButton.addEventListener('click', () => {
+      taskItem.remove();
     }
-    formElement.reset()
-  });
-});
+    )
+    taskItem.appendChild(deleteButton);
+    taskList.appendChild(taskItem)
+
+    taskList.style.listStyleType = 'none'
+    taskList.style.padding = '0'
+    taskList.style.margin = '0'
+
+    form.reset();
 
 
-function css(element, style) {
-  for (const property in style)
-    element.style[property] = style[property];
-}
+  })
 
-function handleToDo(newtask) {
-  let listItem = document.createElement("li");
-  let btn = document.createElement('button')
-
-  css(btn, {
-    'background-color': 'yellow',
-    'color': 'red',
-    'background': 'red',
-    'color': '#ffffff',
-    'padding': '6px',
-    'margin': '4px',
-    'font-size': '12px',
-  });
-
-  btn.addEventListener('click', handleDelete)
-  btn.textContent = 'X Remove'
-  listItem.innerText = `${newtask}`;
-  listItem.appendChild(btn)
-  document.querySelector("#tasks").appendChild(listItem);
-}
-
-function handleDelete(e) {
-  e.target.parentNode.remove()
-}
+})

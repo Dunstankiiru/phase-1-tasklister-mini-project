@@ -1,21 +1,49 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // your code here
-  let form = document.querySelector('#create-task-form')
-  form.addEventListener('submit', (e) => {
-    e.preventDefault()
-    createToDo(e.target['new-task-description'].value)
-  })
+
+  //   // your code here
+
+  const inputField = document.getElementById("new-task-description");
+  const formElement = document.querySelector("form");
+  formElement.addEventListener('submit', (e) => {
+    let newtask = inputField.value
+
+    e.preventDefault();
+    if (newtask.length === 0) {
+      alert('Task cannot be empty')
+    } else {
+      handleToDo(newtask);
+    }
+    formElement.reset()
+  });
 });
 
-function createToDo(description) {
-  let btn = document.createElement('button')
-  btn.addEventListener('click', handleDelete)
-  btn.textContent = "x"
-  let listItems = document.createElement('li');
-  listItems.textContent = description;
-  listItems.appendChild(btn)
-  document.querySelector('#tasks').appendChild(listItems)
+
+function css(element, style) {
+  for (const property in style)
+    element.style[property] = style[property];
 }
+
+function handleToDo(newtask) {
+  let listItem = document.createElement("li");
+  let btn = document.createElement('button')
+
+  css(btn, {
+    'background-color': 'yellow',
+    'color': 'red',
+    'background': 'red',
+    'color': '#ffffff',
+    'padding': '6px',
+    'margin': '4px',
+    'font-size': '12px',
+  });
+
+  btn.addEventListener('click', handleDelete)
+  btn.textContent = 'X Remove'
+  listItem.innerText = `${newtask}`;
+  listItem.appendChild(btn)
+  document.querySelector("#tasks").appendChild(listItem);
+}
+
 function handleDelete(e) {
   e.target.parentNode.remove()
 }

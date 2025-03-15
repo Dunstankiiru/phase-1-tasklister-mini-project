@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const taskText = taskInput.value.trim();
 
+
+    if (taskText === "") return;
+    
     //new list item
     const taskItem = document.createElement("li");
     taskItem.textContent = taskText;

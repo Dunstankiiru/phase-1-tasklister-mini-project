@@ -1,41 +1,46 @@
-// Wait for the DOM to fully load
-document.addEventListener("DOMContentLoaded", function () {
-  // Get references to form, input field, and task list
+document.addEventListener("DOMContentLoaded", function() {
+  // your code here
+
+  //form
   const form = document.getElementById("create-task-form");
-  const taskInput = document.getElementById("new-task-description");
-  const taskList = document.getElementById("tasks");
+  //input field 
+  const formInput = document.getElementById("new-task-description");
+  //tasks append
+  const taskList =document.getElementById("tasks");
 
-  // Listen for form submission
-  form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent page refresh
+  //form submission
 
-    const taskText = taskInput.value.trim();
-    if (taskText === "") return; // Ensure input isn't empty
+  form.addEventListener("submit", function (event){
+    event.preventDefault();
 
-    // Create list item
+    const taskText = formInput.value.trim();
+
+
+    if (taskText === "") return;
+    
+    //new list item
     const taskItem = document.createElement("li");
     taskItem.textContent = taskText;
+    taskList.appendChild(taskItem);
+    taskInput.value =""
 
-    // Create delete button
+
+    //delete button
+
     const deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
+    deleteButton.textContent = "x";
     deleteButton.style.marginLeft = "10px";
     deleteButton.style.color = "red";
 
-    // Add event listener for delete button
-    deleteButton.addEventListener("click", function () {
-      taskItem.remove();
+    deleteButton.addEventListener("click", function(){
+      taskList.removeChild(taskItem);
     });
 
-    // Append elements
     taskItem.appendChild(deleteButton);
+
     taskList.appendChild(taskItem);
 
-    // Clear input field
     taskInput.value = "";
 
-    // Dispatch event to signal task addition (useful for testing)
-    const taskAddedEvent = new Event("task-added");
-    document.dispatchEvent(taskAddedEvent);
-  });
+  })
 });

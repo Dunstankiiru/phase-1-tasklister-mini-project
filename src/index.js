@@ -1,38 +1,26 @@
-document.addEventListener("DOMContentLoaded", function () {
-  // Select form, input field, and task list elements
-  const form = document.querySelector("#create-task-form");
-  const formInput = document.querySelector("#new-task-description");
-  const taskList = document.querySelector("#tasks");
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("create-task-form");
+  const taskList = document.getElementById("tasks");
 
-  // Form submission event listener
   form.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent default form submission behavior
+    event.preventDefault(); // Prevent form submission
 
-    const taskText = formInput.value.trim();
-    if (taskText === "") return; // Ignore empty input
+    const taskInput = document.getElementById("new-task-description");
+    const taskText = taskInput.value.trim();
 
-    // Create a new list item
-    const taskItem = document.createElement("li");
-    taskItem.textContent = taskText;
+    if (taskText !== "") {
+      const li = document.createElement("li");
+      li.textContent = taskText;
 
-    // Create delete button
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "x";
-    deleteButton.style.marginLeft = "10px";
-    deleteButton.style.color = "red";
+      // Add delete button
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "❌";
+      deleteButton.addEventListener("click", () => li.remove());
 
-    // Delete task when button is clicked
-    deleteButton.addEventListener("click", function () {
-      taskList.removeChild(taskItem);
-    });
+      li.appendChild(deleteButton);
+      taskList.appendChild(li);
+    }
 
-    // Append delete button to task item
-    taskItem.appendChild(deleteButton);
-
-    // Append task item to task list
-    taskList.appendChild(taskItem);
-
-    // Clear input field
-    formInput.value = "";
+    taskInput.value = ""; // Clear input field
   });
 });

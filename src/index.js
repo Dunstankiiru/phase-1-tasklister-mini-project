@@ -16,8 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     deleteButton.style.marginLeft = ' 10px'
     deleteButton.addEventListener('click', () => {
       taskItem.remove();
-    }
-    )
+    });
     taskItem.appendChild(deleteButton);
     taskList.appendChild(taskItem)
 
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
     taskList.style.margin = '0'
 
     form.reset();
-
 
   })
 
